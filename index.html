@@ -57,10 +57,66 @@ footer{
     background:#ffb3d9;
     margin-top:40px;
 }
+
+/* ===== POPUP STYLE ===== */
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    animation: fadeIn 0.3s ease;
+}
+
+.popup-content h3 {
+    margin-top: 0;
+    color: #cc0066;
+}
+
+.popup-content button {
+    background: #ff66b3;
+    border: none;
+    padding: 8px 15px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.popup-content button:hover {
+    background: #cc0066;
+}
+
+@keyframes fadeIn {
+    from {transform: scale(0.8); opacity: 0;}
+    to {transform: scale(1); opacity: 1;}
+}
 </style>
 </head>
 
 <body>
+
+<!-- ===== POPUP ===== -->
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <h3>Selamat Datang 👋</h3>
+        <p>Website Laporan OOP Dart<br><b>Nabilah Cahya Suci</b></p>
+        <button onclick="tutupPopup()">Tutup</button>
+    </div>
+</div>
 
 <header>
     <h1>Laporan OOP Dart</h1>
@@ -140,6 +196,23 @@ kita dapat membangun program yang lebih rapi, terstruktur, dan mudah dikembangka
 
 <footer>
 </footer>
+
+<script>
+window.onload = function() {
+    document.getElementById("popup").style.display = "flex";
+}
+
+function tutupPopup() {
+    document.getElementById("popup").style.display = "none";
+}
+
+window.onclick = function(event) {
+    let popup = document.getElementById("popup");
+    if (event.target == popup) {
+        popup.style.display = "none";
+    }
+}
+</script>
 
 </body>
 </html>
