@@ -40,55 +40,53 @@ header p{
     box-shadow:0 4px 8px rgba(0,0,0,0.1);
 }
 
-h2{
-    color:#cc0066;
-    margin-top:40px;
-}
+/* ===== POPUP STYLE ===== */
 
-iframe{
-    width:100%;
-    height:400px;
-    border:1px solid #ff99cc;
-    border-radius:6px;
-    margin-top:15px;
-}
-
-/* POPUP OVERLAY */
-.popup-overlay{
+.overlay{
     position:fixed;
     top:0;
     left:0;
     width:100%;
     height:100%;
-    background:rgba(0,0,0,0.4);
+    background:rgba(0,0,0,0.5);
     display:flex;
     justify-content:center;
     align-items:center;
-    visibility:hidden;
     opacity:0;
+    visibility:hidden;
     transition:0.3s;
 }
 
-/* POPUP BOX */
+.overlay.active{
+    opacity:1;
+    visibility:visible;
+}
+
 .popup{
     background:white;
     padding:30px;
-    border-radius:10px;
-    width:300px;
+    border-radius:12px;
+    width:320px;
     text-align:center;
-    box-shadow:0 5px 15px rgba(0,0,0,0.3);
+    transform:scale(0.7);
+    transition:0.3s;
+    box-shadow:0 8px 20px rgba(0,0,0,0.3);
 }
 
-.popup h3{
-    margin-top:0;
+.overlay.active .popup{
+    transform:scale(1);
+}
+
+.popup h2{
     color:#cc0066;
+    margin-top:0;
 }
 
 .popup button{
     margin-top:20px;
-    padding:8px 20px;
+    padding:10px 20px;
     border:none;
-    border-radius:5px;
+    border-radius:6px;
     background:#ff66b2;
     color:white;
     cursor:pointer;
@@ -97,28 +95,15 @@ iframe{
 .popup button:hover{
     background:#e60073;
 }
-
-/* SHOW POPUP */
-.popup-overlay.active{
-    visibility:visible;
-    opacity:1;
-}
-
-footer{
-    text-align:center;
-    padding:15px;
-    background:#ffb3d9;
-    margin-top:40px;
-}
 </style>
 </head>
 
 <body>
 
 <!-- POPUP -->
-<div class="popup-overlay" id="popup">
+<div class="overlay" id="popupOverlay">
     <div class="popup">
-        <h3>Selamat Datang 🌸</h3>
+        <h2>Selamat Datang 🌸</h2>
         <p>
         Laporan OOP Dart<br>
         Nama: Nabilah Cahya Suci<br>
@@ -137,42 +122,25 @@ footer{
 </header>
 
 <div class="container">
-
-<h2>Pengertian OOP</h2>
-<p>
-Object Oriented Programming (OOP) adalah pendekatan dalam pemrograman yang 
-mengorganisasi kode ke dalam bentuk objek sehingga program lebih terstruktur 
-dan mudah dikembangkan.
-</p>
-
-<h2>Konsep-Konsep OOP</h2>
-<ul>
-<li><b>Class</b> sebagai cetakan untuk membuat objek.</li>
-<li><b>Object</b> sebagai hasil dari class.</li>
-<li><b>Encapsulation</b> untuk membatasi akses langsung ke data.</li>
-<li><b>Inheritance</b> untuk mewariskan sifat ke class lain.</li>
-<li><b>Polymorphism</b> untuk memungkinkan method memiliki banyak bentuk.</li>
-</ul>
-
-<h2>Kesimpulan</h2>
-<p>
-Dengan memahami konsep OOP, kita dapat membangun program yang lebih rapi,
-terstruktur, dan mudah dikembangkan.
-</p>
-
+    <h2>Isi Laporan</h2>
+    <p>Tambahkan materi OOP dan DartPad kamu di sini.</p>
 </div>
-
-<footer>
-</footer>
 
 <script>
 window.onload = function() {
-    document.getElementById("popup").classList.add("active");
-}
+    document.getElementById("popupOverlay").classList.add("active");
+};
 
 function closePopup(){
-    document.getElementById("popup").classList.remove("active");
+    document.getElementById("popupOverlay").classList.remove("active");
 }
+
+// Tutup popup jika klik di luar kotak
+document.getElementById("popupOverlay").addEventListener("click", function(e){
+    if(e.target === this){
+        closePopup();
+    }
+});
 </script>
 
 </body>
