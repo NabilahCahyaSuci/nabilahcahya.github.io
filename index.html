@@ -13,6 +13,7 @@ body{
     color:#4a0d33;
 }
 
+/* HEADER */
 header{
     background:#ffb3d9;
     padding:20px;
@@ -24,10 +25,11 @@ header h1{
 }
 
 header p{
-    margin:5px 0 0 0;
+    margin:5px 0;
     font-weight:bold;
 }
 
+/* CONTAINER */
 .container{
     width:90%;
     max-width:1000px;
@@ -51,18 +53,55 @@ iframe{
     margin-top:15px;
 }
 
-button{
-    background:#ff66b2;
-    color:white;
-    border:none;
-    padding:10px 20px;
-    border-radius:6px;
-    cursor:pointer;
-    margin-top:20px;
+/* POPUP OVERLAY */
+.popup-overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.4);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    visibility:hidden;
+    opacity:0;
+    transition:0.3s;
 }
 
-button:hover{
+/* POPUP BOX */
+.popup{
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    width:300px;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,0.3);
+}
+
+.popup h3{
+    margin-top:0;
+    color:#cc0066;
+}
+
+.popup button{
+    margin-top:20px;
+    padding:8px 20px;
+    border:none;
+    border-radius:5px;
+    background:#ff66b2;
+    color:white;
+    cursor:pointer;
+}
+
+.popup button:hover{
     background:#e60073;
+}
+
+/* SHOW POPUP */
+.popup-overlay.active{
+    visibility:visible;
+    opacity:1;
 }
 
 footer{
@@ -72,20 +111,23 @@ footer{
     margin-top:40px;
 }
 </style>
-
-<script>
-window.onload = function() {
-    alert("Selamat datang di Laporan OOP Dart 🌸\n\nNama: Nabilah Cahya Suci\nNIM: 251410018\nKelas: SI2A");
-}
-
-function showPopup(){
-    alert("Terima kasih sudah membaca laporan OOP Dart 💕");
-}
-</script>
-
 </head>
 
 <body>
+
+<!-- POPUP -->
+<div class="popup-overlay" id="popup">
+    <div class="popup">
+        <h3>Selamat Datang 🌸</h3>
+        <p>
+        Laporan OOP Dart<br>
+        Nama: Nabilah Cahya Suci<br>
+        NIM: 251410018<br>
+        Kelas: SI2A
+        </p>
+        <button onclick="closePopup()">Tutup</button>
+    </div>
+</div>
 
 <header>
     <h1>Laporan OOP Dart</h1>
@@ -99,53 +141,39 @@ function showPopup(){
 <h2>Pengertian OOP</h2>
 <p>
 Object Oriented Programming (OOP) adalah pendekatan dalam pemrograman yang 
-mengorganisasi kode ke dalam bentuk objek. Objek ini merepresentasikan 
-sesuatu yang memiliki data serta perilaku sehingga program menjadi lebih 
-terstruktur dan mudah dikembangkan.
+mengorganisasi kode ke dalam bentuk objek sehingga program lebih terstruktur 
+dan mudah dikembangkan.
 </p>
 
 <h2>Konsep-Konsep OOP</h2>
 <ul>
 <li><b>Class</b> sebagai cetakan untuk membuat objek.</li>
-<li><b>Object</b> sebagai hasil nyata dari class.</li>
+<li><b>Object</b> sebagai hasil dari class.</li>
 <li><b>Encapsulation</b> untuk membatasi akses langsung ke data.</li>
 <li><b>Inheritance</b> untuk mewariskan sifat ke class lain.</li>
 <li><b>Polymorphism</b> untuk memungkinkan method memiliki banyak bentuk.</li>
 </ul>
 
-<button onclick="showPopup()">Klik Untuk Popup 💖</button>
-
-<h2>Class Sederhana (Car)</h2>
-<iframe src="https://dartpad.dev/embed-inline.html?id=0e08132e64feb0dada7f2b1018b0f57a"></iframe>
-
-<h2>Object Instantiation</h2>
-<iframe src="https://dartpad.dev/embed-inline.html?id=4310ab7f506846fa08fb70f1e4a3a110"></iframe>
-
-<h2>Constructors</h2>
-<iframe src="https://dartpad.dev/embed-inline.html?id=df1872db21675f08e077e66af653fc33"></iframe>
-
-<h2>Practice Class Mahasiswa</h2>
-<iframe src="https://dartpad.dev/embed-inline.html?id=d8179e8135108966087d5869f7c114b6"></iframe>
-
-<h2>Encapsulation</h2>
-<iframe src="https://dartpad.dev/embed-inline.html?id=bea65cb8367e25111b04611f775710e1"></iframe>
-
-<h2>This Keyword</h2>
-<iframe src="https://dartpad.dev/embed-inline.html?id=95dd68716c445a7af79ee01b40ef088b"></iframe>
-
-<h2>Product Class</h2>
-<iframe src="https://dartpad.dev/embed-inline.html?id=63831a0983a2fed183c097908a02a75e"></iframe>
-
 <h2>Kesimpulan</h2>
 <p>
-Dengan memahami konsep OOP seperti class, object, constructor, encapsulation, dan this keyword,
-kita dapat membangun program yang lebih rapi, terstruktur, dan mudah dikembangkan.
+Dengan memahami konsep OOP, kita dapat membangun program yang lebih rapi,
+terstruktur, dan mudah dikembangkan.
 </p>
 
 </div>
 
 <footer>
 </footer>
+
+<script>
+window.onload = function() {
+    document.getElementById("popup").classList.add("active");
+}
+
+function closePopup(){
+    document.getElementById("popup").classList.remove("active");
+}
+</script>
 
 </body>
 </html>
