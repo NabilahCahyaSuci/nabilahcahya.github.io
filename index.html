@@ -19,15 +19,6 @@ header{
     text-align:center;
 }
 
-header h1{
-    margin:0;
-}
-
-header p{
-    margin:5px 0 0 0;
-    font-weight:bold;
-}
-
 .container{
     width:90%;
     max-width:1000px;
@@ -51,166 +42,91 @@ iframe{
     margin-top:15px;
 }
 
-footer{
+/* ===== TOMBOL ===== */
+.popup-btn{
+    background:#ff66b3;
+    border:none;
+    padding:10px 20px;
+    color:white;
+    border-radius:6px;
+    cursor:pointer;
+    margin-top:15px;
+}
+
+.popup-btn:hover{
+    background:#cc0066;
+}
+
+/* ===== POPUP ===== */
+.popup{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+    justify-content:center;
+    align-items:center;
+}
+
+.popup-content{
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    width:90%;
+    max-width:400px;
     text-align:center;
-    padding:15px;
-    background:#ffb3d9;
-    margin-top:40px;
+    position:relative;
 }
 
-/* ===== POPUP STYLE ===== */
-.popup {
-    display: none;
-    position: fixed;
-    z-index: 999;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.6);
-    justify-content: center;
-    align-items: center;
-}
-
-.popup-content {
-    background: white;
-    padding: 25px;
-    border-radius: 10px;
-    text-align: center;
-    width: 90%;
-    max-width: 400px;
-    animation: fadeIn 0.3s ease;
-}
-
-.popup-content h3 {
-    margin-top: 0;
-    color: #cc0066;
-}
-
-.popup-content button {
-    background: #ff66b3;
-    border: none;
-    padding: 8px 15px;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.popup-content button:hover {
-    background: #cc0066;
-}
-
-@keyframes fadeIn {
-    from {transform: scale(0.8); opacity: 0;}
-    to {transform: scale(1); opacity: 1;}
+.close{
+    position:absolute;
+    top:10px;
+    right:15px;
+    font-size:20px;
+    cursor:pointer;
+    color:#cc0066;
 }
 </style>
 </head>
 
 <body>
 
-<!-- ===== POPUP ===== -->
-<div id="popup" class="popup">
-    <div class="popup-content">
-        <h3>Selamat Datang 👋</h3>
-        <p>Website Laporan OOP Dart<br><b>Nabilah Cahya Suci</b></p>
-        <button onclick="tutupPopup()">Tutup</button>
-    </div>
-</div>
-
 <header>
     <h1>Laporan OOP Dart</h1>
     <p>Nama: Nabilah Cahya Suci</p>
     <p>NIM: 251410018</p>
     <p>Kelas: SI2A</p>
+
+    <!-- TOMBOL UNTUK MEMUNCULKAN POPUP -->
+    <button class="popup-btn" onclick="bukaPopup()">Lihat Info</button>
 </header>
 
 <div class="container">
-
 <h2>Pengertian OOP</h2>
 <p>
-Object Oriented Programming (OOP) adalah pendekatan dalam pemrograman yang 
-mengorganisasi kode ke dalam bentuk objek. Objek ini merepresentasikan 
-sesuatu yang memiliki data serta perilaku sehingga program menjadi lebih 
-terstruktur dan mudah dikembangkan.
+Object Oriented Programming (OOP) adalah pendekatan dalam pemrograman 
+yang mengorganisasi kode ke dalam bentuk objek.
 </p>
-
-<h2>Konsep-Konsep OOP</h2>
-<ul>
-<li><b>Class</b> sebagai cetakan untuk membuat objek.</li>
-<li><b>Object</b> sebagai hasil nyata dari class.</li>
-<li><b>Encapsulation</b> untuk membatasi akses langsung ke data.</li>
-<li><b>Inheritance</b> untuk mewariskan sifat ke class lain.</li>
-<li><b>Polymorphism</b> untuk memungkinkan method memiliki banyak bentuk.</li>
-</ul>
-
-<h2>Class Sederhana (Car)</h2>
-<p>
-Contoh berikut menunjukkan pembuatan class sederhana bernama Car di Dart.
-</p>
-<iframe src="https://dartpad.dev/embed-inline.html?id=0e08132e64feb0dada7f2b1018b0f57a"></iframe>
-
-<h2>Object Instantiation</h2>
-<p>
-Bagian ini memperlihatkan proses pembuatan objek dari class yang sudah dibuat.
-</p>
-<iframe src="https://dartpad.dev/embed-inline.html?id=4310ab7f506846fa08fb70f1e4a3a110"></iframe>
-
-<h2>Constructors</h2>
-<p>
-Constructor digunakan untuk memberikan nilai awal pada atribut ketika objek dibuat.
-</p>
-<iframe src="https://dartpad.dev/embed-inline.html?id=df1872db21675f08e077e66af653fc33"></iframe>
-
-<h2>Practice Class Mahasiswa</h2>
-<p>
-Latihan implementasi class Mahasiswa dengan atribut dan method sederhana.
-</p>
-<iframe src="https://dartpad.dev/embed-inline.html?id=d8179e8135108966087d5869f7c114b6"></iframe>
-
-<h2>Encapsulation</h2>
-<p>
-Encapsulation membatasi akses langsung ke data menggunakan private variable dan getter/setter.
-</p>
-<iframe src="https://dartpad.dev/embed-inline.html?id=bea65cb8367e25111b04611f775710e1"></iframe>
-
-<h2>This Keyword</h2>
-<p>
-Keyword <b>this</b> digunakan untuk merujuk pada atribut milik class agar tidak tertukar dengan parameter.
-</p>
-<iframe src="https://dartpad.dev/embed-inline.html?id=95dd68716c445a7af79ee01b40ef088b"></iframe>
-
-<h2>Product Class</h2>
-<p>
-Contoh implementasi class Product yang lebih mendekati kasus penggunaan nyata.
-</p>
-<iframe src="https://dartpad.dev/embed-inline.html?id=63831a0983a2fed183c097908a02a75e"></iframe>
-
-<h2>Kesimpulan</h2>
-<p>
-Dengan memahami konsep OOP seperti class, object, constructor, encapsulation, dan this keyword,
-kita dapat membangun program yang lebih rapi, terstruktur, dan mudah dikembangkan.
-</p>
-
 </div>
 
-<footer>
-</footer>
+<!-- ===== POPUP ===== -->
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="tutupPopup()">&times;</span>
+        <h3>Informasi Website</h3>
+        <p>Ini adalah website Laporan OOP Dart oleh Nabilah Cahya Suci.</p>
+    </div>
+</div>
 
 <script>
-window.onload = function() {
-    document.getElementById("popup").style.display = "flex";
+function bukaPopup(){
+    document.getElementById("popup").style.display="flex";
 }
 
-function tutupPopup() {
-    document.getElementById("popup").style.display = "none";
-}
-
-window.onclick = function(event) {
-    let popup = document.getElementById("popup");
-    if (event.target == popup) {
-        popup.style.display = "none";
-    }
+function tutupPopup(){
+    document.getElementById("popup").style.display="none";
 }
 </script>
 
