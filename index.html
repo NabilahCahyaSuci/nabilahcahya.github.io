@@ -57,80 +57,10 @@ footer{
     background:#ffb3d9;
     margin-top:40px;
 }
-
-/* ===== POPUP STYLE ===== */
-
-.overlay{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.5);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    opacity:0;
-    visibility:hidden;
-    transition:0.3s;
-}
-
-.overlay.active{
-    opacity:1;
-    visibility:visible;
-}
-
-.popup{
-    background:white;
-    padding:30px;
-    border-radius:12px;
-    width:320px;
-    text-align:center;
-    transform:scale(0.7);
-    transition:0.3s;
-    box-shadow:0 8px 20px rgba(0,0,0,0.3);
-}
-
-.overlay.active .popup{
-    transform:scale(1);
-}
-
-.popup h2{
-    color:#cc0066;
-    margin-top:0;
-}
-
-.popup button{
-    margin-top:20px;
-    padding:10px 20px;
-    border:none;
-    border-radius:6px;
-    background:#ff66b2;
-    color:white;
-    cursor:pointer;
-}
-
-.popup button:hover{
-    background:#e60073;
-}
 </style>
 </head>
 
 <body>
-
-<!-- POPUP -->
-<div class="overlay" id="popupOverlay">
-    <div class="popup">
-        <h2>Selamat Datang 🌸</h2>
-        <p>
-        Laporan OOP Dart<br>
-        Nama: Nabilah Cahya Suci<br>
-        NIM: 251410018<br>
-        Kelas: SI2A
-        </p>
-        <button onclick="closePopup()">Tutup</button>
-    </div>
-</div>
 
 <header>
     <h1>Laporan OOP Dart</h1>
@@ -159,31 +89,45 @@ terstruktur dan mudah dikembangkan.
 </ul>
 
 <h2>Class Sederhana (Car)</h2>
-<p>Contoh berikut menunjukkan pembuatan class sederhana bernama Car di Dart.</p>
+<p>
+Contoh berikut menunjukkan pembuatan class sederhana bernama Car di Dart.
+</p>
 <iframe src="https://dartpad.dev/embed-inline.html?id=0e08132e64feb0dada7f2b1018b0f57a"></iframe>
 
 <h2>Object Instantiation</h2>
-<p>Bagian ini memperlihatkan proses pembuatan objek dari class yang sudah dibuat.</p>
+<p>
+Bagian ini memperlihatkan proses pembuatan objek dari class yang sudah dibuat.
+</p>
 <iframe src="https://dartpad.dev/embed-inline.html?id=4310ab7f506846fa08fb70f1e4a3a110"></iframe>
 
 <h2>Constructors</h2>
-<p>Constructor digunakan untuk memberikan nilai awal pada atribut ketika objek dibuat.</p>
+<p>
+Constructor digunakan untuk memberikan nilai awal pada atribut ketika objek dibuat.
+</p>
 <iframe src="https://dartpad.dev/embed-inline.html?id=df1872db21675f08e077e66af653fc33"></iframe>
 
 <h2>Practice Class Mahasiswa</h2>
-<p>Latihan implementasi class Mahasiswa dengan atribut dan method sederhana.</p>
+<p>
+Latihan implementasi class Mahasiswa dengan atribut dan method sederhana.
+</p>
 <iframe src="https://dartpad.dev/embed-inline.html?id=d8179e8135108966087d5869f7c114b6"></iframe>
 
 <h2>Encapsulation</h2>
-<p>Encapsulation membatasi akses langsung ke data menggunakan private variable dan getter/setter.</p>
+<p>
+Encapsulation membatasi akses langsung ke data menggunakan private variable dan getter/setter.
+</p>
 <iframe src="https://dartpad.dev/embed-inline.html?id=bea65cb8367e25111b04611f775710e1"></iframe>
 
 <h2>This Keyword</h2>
-<p>Keyword <b>this</b> digunakan untuk merujuk pada atribut milik class agar tidak tertukar dengan parameter.</p>
+<p>
+Keyword <b>this</b> digunakan untuk merujuk pada atribut milik class agar tidak tertukar dengan parameter.
+</p>
 <iframe src="https://dartpad.dev/embed-inline.html?id=95dd68716c445a7af79ee01b40ef088b"></iframe>
 
 <h2>Product Class</h2>
-<p>Contoh implementasi class Product yang lebih mendekati kasus penggunaan nyata.</p>
+<p>
+Contoh implementasi class Product yang lebih mendekati kasus penggunaan nyata.
+</p>
 <iframe src="https://dartpad.dev/embed-inline.html?id=63831a0983a2fed183c097908a02a75e"></iframe>
 
 <h2>Kesimpulan</h2>
@@ -194,23 +138,8 @@ kita dapat membangun program yang lebih rapi, terstruktur, dan mudah dikembangka
 
 </div>
 
-<footer></footer>
-
-<script>
-window.onload = function() {
-    document.getElementById("popupOverlay").classList.add("active");
-};
-
-function closePopup(){
-    document.getElementById("popupOverlay").classList.remove("active");
-}
-
-document.getElementById("popupOverlay").addEventListener("click", function(e){
-    if(e.target === this){
-        closePopup();
-    }
-});
-</script>
+<footer>
+</footer>
 
 </body>
 </html>
