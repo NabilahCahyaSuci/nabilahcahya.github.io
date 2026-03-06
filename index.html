@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Laporan OOP Dart</title>
+<title>Laporan OOP Dart (Struktur: Judul, Penjelasan, Code, Tombol)</title>
 
 <style>
+/* ===== UI PERTAHAN (SESUAI ASLI) ===== */
 body{
     margin:0;
     font-family: Arial, Helvetica, sans-serif;
@@ -43,14 +44,144 @@ h2{
     margin-top:40px;
 }
 
+/* iframe wrapper */
+.iframe-wrapper {
+    margin-top: 15px;
+}
+
 iframe{
     width:100%;
     height:400px;
     border:1px solid #ff99cc;
     border-radius:6px;
-    margin-top:15px;
 }
 
+/* tombol popup */
+.btn-popup {
+    background-color: #cc0066;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(204, 0, 102, 0.3);
+    transition: background-color 0.2s;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 10px 0 5px 0;
+    position: relative;
+    z-index: 10;
+}
+.btn-popup:hover {
+    background-color: #a30552;
+}
+.btn-popup:active {
+    transform: scale(0.97);
+}
+
+/* kontainer per topik - mengikuti struktur baru: judul, penjelasan, code, tombol, iframe */
+.topik-section {
+    margin-bottom: 40px;
+    border-bottom: 1px dashed #ffb3d9;
+    padding-bottom: 25px;
+}
+
+.topik-judul {
+    color: #cc0066;
+    font-size: 1.5rem;
+    margin: 0 0 10px 0;
+    border-left: 6px solid #ff99cc;
+    padding-left: 15px;
+}
+
+.topik-penjelasan {
+    background: #fff0f7;
+    padding: 12px 18px;
+    border-radius: 12px;
+    margin: 10px 0 15px 0;
+    line-height: 1.6;
+}
+
+/* area kode Dart (pratinjau) - tampil seperti code snippet */
+.code-block {
+    background-color: #2d0a1f;  /* gelap biar kontras */
+    color: #ffe6f2;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+    padding: 15px 20px;
+    border-radius: 14px;
+    border: 1px solid #ff99cc;
+    overflow-x: auto;
+    white-space: pre-wrap;       /* wrap kode panjang */
+    word-break: break-word;
+    margin: 15px 0 10px 0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    line-height: 1.5;
+}
+
+/* kondisi iframe tersembunyi */
+iframe.hidden-iframe {
+    display: none;
+}
+
+/* Style untuk Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    overflow: auto;
+}
+
+.modal-content {
+    position: relative;
+    margin: 5% auto;
+    width: 90%;
+    height: 85%;
+    max-width: 1200px;
+    background: white;
+    border-radius: 12px;
+    padding: 10px;
+}
+
+.modal-content iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 8px;
+}
+
+.close-btn {
+    position: absolute;
+    right: -10px;
+    top: -15px;
+    color: white;
+    background: #cc0066;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1001;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.close-btn:hover {
+    background: #a30552;
+}
+
+/* footer */
 footer{
     text-align:center;
     padding:15px;
@@ -59,7 +190,6 @@ footer{
 }
 </style>
 </head>
-
 <body>
 
 <header>
@@ -71,6 +201,7 @@ footer{
 
 <div class="container">
 
+<!-- ===== PENGERTIAN OOP (tanpa iframe) ===== -->
 <h2>Pengertian OOP</h2>
 <p>
 Object Oriented Programming (OOP) adalah pendekatan dalam pemrograman yang 
@@ -79,6 +210,7 @@ sesuatu yang memiliki data serta perilaku sehingga program menjadi lebih
 terstruktur dan mudah dikembangkan.
 </p>
 
+<!-- ===== KONSEP OOP ===== -->
 <h2>Konsep-Konsep OOP</h2>
 <ul>
 <li><b>Class</b> sebagai cetakan untuk membuat objek.</li>
@@ -88,48 +220,340 @@ terstruktur dan mudah dikembangkan.
 <li><b>Polymorphism</b> untuk memungkinkan method memiliki banyak bentuk.</li>
 </ul>
 
-<h2>Class Sederhana (Car)</h2>
-<p>
-Contoh berikut menunjukkan pembuatan class sederhana bernama Car di Dart.
-</p>
-<iframe src="https://dartpad.dev/embed-inline.html?id=0e08132e64feb0dada7f2b1018b0f57a"></iframe>
+<!-- ===== TOPIK 1 : CLASS SEDERHANA (CAR) ===== -->
+<div class="topik-section">
+    <h3 class="topik-judul">🔹 Class Sederhana (Car)</h3>
+    <div class="topik-penjelasan">
+        Contoh berikut menunjukkan pembuatan class sederhana bernama Car di Dart. 
+        Class ini memiliki atribut brand dan method drive().
+    </div>
+    <!-- CODE DART (pratinjau) -->
+    <div class="code-block">
+// Nama  : Nabilah Cahya Suci 
+// NIM   : 251410018
+// Kelas : SI2A
 
-<h2>Object Instantiation</h2>
-<p>
-Bagian ini memperlihatkan proses pembuatan objek dari class yang sudah dibuat.
-</p>
-<iframe src="https://dartpad.dev/embed-inline.html?id=4310ab7f506846fa08fb70f1e4a3a110"></iframe>
+class Car {
+  String? model;
+  String? color;
 
-<h2>Constructors</h2>
-<p>
-Constructor digunakan untuk memberikan nilai awal pada atribut ketika objek dibuat.
-</p>
-<iframe src="https://dartpad.dev/embed-inline.html?id=df1872db21675f08e077e66af653fc33"></iframe>
+  void start() {
+    print('Car started!');
+  }
 
-<h2>Practice Class Mahasiswa</h2>
-<p>
-Latihan implementasi class Mahasiswa dengan atribut dan method sederhana.
-</p>
-<iframe src="https://dartpad.dev/embed-inline.html?id=d8179e8135108966087d5869f7c114b6"></iframe>
+  void stop() {
+    print('Car stopped!');
+  }
+}
 
-<h2>Encapsulation</h2>
-<p>
-Encapsulation membatasi akses langsung ke data menggunakan private variable dan getter/setter.
-</p>
-<iframe src="https://dartpad.dev/embed-inline.html?id=bea65cb8367e25111b04611f775710e1"></iframe>
+void main() {
+  Car myCar = Car();
+  myCar.model = "Sedan";
+  myCar.color = "Merah";
 
-<h2>This Keyword</h2>
-<p>
-Keyword <b>this</b> digunakan untuk merujuk pada atribut milik class agar tidak tertukar dengan parameter.
-</p>
-<iframe src="https://dartpad.dev/embed-inline.html?id=95dd68716c445a7af79ee01b40ef088b"></iframe>
+  myCar.start();
+  myCar.stop();
 
-<h2>Product Class</h2>
-<p>
-Contoh implementasi class Product yang lebih mendekati kasus penggunaan nyata.
-</p>
-<iframe src="https://dartpad.dev/embed-inline.html?id=63831a0983a2fed183c097908a02a75e"></iframe>
+  Car anotherCar = Car();
+  anotherCar.model = "SUV";
+  anotherCar.color = "Biru";
 
+  anotherCar.start();
+  anotherCar.stop();
+
+  print("Model mobil saya: ${myCar.model}, warnanya: ${myCar.color}");
+  print("Model mobil lain: ${anotherCar.model}, warnanya: ${anotherCar.color}");
+}
+    </div>
+    <!-- TOMBOL IFRAME -->
+    <button class="btn-popup" onclick="openDartPad('0e08132e64feb0dada7f2b1018b0f57a')">▶ Jalankan Kode di DartPad</button>
+</div>
+
+<!-- ===== TOPIK 2 : OBJECT INSTANTIATION ===== -->
+<div class="topik-section">
+    <h3 class="topik-judul">🔹 Object Instantiation</h3>
+    <div class="topik-penjelasan">
+        Bagian ini memperlihatkan proses pembuatan objek dari class Car yang sudah dibuat.
+        Kita membuat instance myCar dan memanggil method drive().
+    </div>
+    <!-- CODE DART -->
+    <div class="code-block">
+// Nama   : Nabilah Cahya Suci
+// Nim    : 251410018
+// Kelas  : Si2A
+
+class Car {
+  String model;
+  String color;
+
+  Car(this.model, this.color);
+
+  void start() {
+    print("Mobil $model dengan warna $color dinyalakan.");
+  }
+
+  void stop() {
+    print("Mobil $model dihentikan.");
+  }
+}
+
+void main() {
+  Car myCar = Car("Sedan", "Merah");
+  Car anotherCar = Car("SUV", "Biru");
+
+   myCar.start();
+   anotherCar.start();
+}
+    </div>
+    <!-- TOMBOL IFRAME -->
+    <button class="btn-popup" onclick="openDartPad('4310ab7f506846fa08fb70f1e4a3a110')">▶ Jalankan Kode di DartPad</button>
+</div>
+
+<!-- ===== TOPIK 3 : CONSTRUCTORS ===== -->
+<div class="topik-section">
+    <h3 class="topik-judul">🔹 Constructors</h3>
+    <div class="topik-penjelasan">
+        Constructor digunakan untuk memberikan nilai awal pada atribut ketika objek dibuat.
+        Berikut contoh class Person dengan constructor.
+    </div>
+    <div class="code-block">
+// Nama  : Nabilah Cahya Suci 
+// NIM   : 251410018
+// Kelas : SI2A
+
+class Car {
+  String? model;
+  String? color;
+
+  Car(this.model, this.color);
+
+  void start() {
+    print('Car started!');
+  }
+
+  void stop() {
+    print('Car stopped!');
+  }
+}
+
+void main() {
+  Car myCar = Car('Toyota', 'Red');
+  print('Model car: ${myCar.model}, color: ${myCar.color}');
+  myCar.start();
+}
+    </div>
+    <button class="btn-popup" onclick="openDartPad('df1872db21675f08e077e66af653fc33')">▶ Jalankan Kode di DartPad</button>
+</div>
+
+<!-- ===== TOPIK 4 : MAHASISWA (PRACTICE) ===== -->
+<div class="topik-section">
+    <h3 class="topik-judul">🔹 Practice Class Mahasiswa</h3>
+    <div class="topik-penjelasan">
+        Latihan implementasi class Mahasiswa dengan atribut nama dan nim, 
+        dilengkapi method perkenalan().
+    </div>
+    <div class="code-block">
+// Nama  : Nabilah Cahya Suci 
+// NIM   : 251410018
+// Kelas : SI2A
+
+class Mahasiswa {
+  String nama;
+  String nim;
+  double ipk;
+
+  Mahasiswa(this.nama, this.nim, this.ipk) {
+    if (ipk < 0.0 || ipk > 4.0) {
+      throw ArgumentError('IPK harus berada dalam rentang 0.0 - 4.0');
+    }
+  }
+
+  void tampilkanData() {
+    print('===== Data Mahasiswa =====');
+    print('Nama : $nama');
+    print('NIM  : $nim');
+    print('IPK  : $ipk');
+    print('==========================');
+  }
+
+  @override
+  String toString() => 'Mahasiswa(nama: $nama, nim: $nim, ipk: $ipk)';
+}
+
+void main() {
+  Mahasiswa mhs1 = Mahasiswa('Budi Santoso', '20230001', 3.75);
+  Mahasiswa mhs2 = Mahasiswa('Siti Aminah', '20230002', 3.92);
+
+  mhs1.tampilkanData();
+  mhs2.tampilkanData();
+
+  print(mhs1);
+}
+    </div>
+    <button class="btn-popup" onclick="openDartPad('d8179e8135108966087d5869f7c114b6')">▶ Jalankan Kode di DartPad</button>
+</div>
+
+<!-- ===== TOPIK 5 : ENCAPSULATION ===== -->
+<div class="topik-section">
+    <h3 class="topik-judul">🔹 Encapsulation</h3>
+    <div class="topik-penjelasan">
+        Encapsulation membatasi akses langsung ke data menggunakan private variable 
+        (ditandai underscore) dan getter/setter.
+    </div>
+    <div class="code-block">
+// Nama  : Nabilah Cahya Suci 
+// NIM   : 251410018
+// Kelas : SI2A
+
+class Person {
+  String _name;
+  int age;
+
+  Person(this._name, this.age);
+
+  void setName(String name) {
+    _name = name;
+  }
+
+  String getName() {
+    return _name;
+  }
+}
+
+void main() {
+  Person person = Person("Salma", 20);
+  print(person.age);
+
+  person.setName('Aqila');
+  print(person.getName());
+}
+    </div>
+    <button class="btn-popup" onclick="openDartPad('bea65cb8367e25111b04611f775710e1')">▶ Jalankan Kode di DartPad</button>
+</div>
+
+<!-- ===== TOPIK 6 : THIS KEYWORD ===== -->
+<div class="topik-section">
+    <h3 class="topik-judul">🔹 This Keyword</h3>
+    <div class="topik-penjelasan">
+        Keyword <b>this</b> digunakan untuk merujuk pada atribut milik class 
+        agar tidak tertukar dengan parameter yang namanya sama.
+    </div>
+    <div class="code-block">
+// Nama : Nabilah Cahya Suci
+// NIM : 251410018
+// Kelas : SI2A
+
+class Product {
+  String nama;
+
+  Product(this.nama);
+}
+
+void main() {
+  var product1 = Product('Keyboard Gaming');
+  print('Produk dibuat: ${product1.nama}');
+}
+    </div>
+    <button class="btn-popup" onclick="openDartPad('95dd68716c445a7af79ee01b40ef088b')">▶ Jalankan Kode di DartPad</button>
+</div>
+
+<!-- ===== TOPIK 7 : PRODUCT CLASS (KODE AWAL DARI SOAL) ===== -->
+<div class="topik-section">
+    <h3 class="topik-judul">🔹 Product Class (Dari Kode Awal Nabilah)</h3>
+    <div class="topik-penjelasan">
+        Contoh implementasi class Product sesuai kode awal. 
+        Menampilkan pembuatan objek Keyboard Gaming.
+    </div>
+    <!-- CODE DART persis seperti di soal: class Product dan main -->
+    <div class="code-block">
+// Nama  : Nabilah Cahya Suci 
+// NIM   : 251410018
+// Kelas : SI2A
+
+class Produk {
+  final String id;
+  final String nama;
+  final double harga;
+  final int stok;
+  final String kategori;
+
+  Produk({
+    required this.id,
+    required this.nama,
+    required this.harga,
+    this.stok = 0,
+    this.kategori = 'Umum',
+  });
+
+  @override
+  String toString() =>
+      'Produk(id: $id, nama: $nama, harga: Rp${harga.toStringAsFixed(2)}, '
+      'stok: $stok, kategori: $kategori)';
+}
+
+void main() {
+  Produk laptop = Produk(
+    id: 'P001',
+    nama: 'Laptop Gaming',
+    harga: 15000000,
+    stok: 15,
+    kategori: 'Elektronik',
+  );
+
+  Produk smartphone = Produk(
+    id: 'P002',
+    nama: 'Smartphone Flagship',
+    harga: 12000000,
+    stok: 25,
+  );
+
+  Produk kamera = Produk(
+    id: 'P003',
+    nama: 'Kamera Mirrorless',
+    harga: 20000000,
+  );
+
+  print('=== Daftar Produk ===');
+  print(laptop);
+  print(smartphone);
+  print(kamera);
+}
+    </div>
+    <button class="btn-popup" onclick="openDartPad('63831a0983a2fed183c097908a02a75e')">▶ Jalankan Kode di DartPad</button>
+</div>
+
+<!-- ===== TOPIK 8 : HEWAN CLASS ===== -->
+<div class="topik-section">
+    <h3 class="topik-judul">🔹 QUIZ BONUS: HEWAN CLASS</h3>
+    <div class="topik-penjelasan">
+        Implementasi Kelas Hewan sesuai instruksi diskusi untuk pendefinisian atribut dan metode dasar.
+    </div>
+    <div class="code-block">
+// Nama  : Nabilah Cahya Suci 
+// NIM   : 251410018
+// Kelas : SI2A
+
+class Hewan {
+  String nama;
+
+  Hewan(this.nama);
+
+  void bersuara() {
+    print('$nama sedang bersuara...');
+    print('Sound Protocol: [DATA_SOUND_GENERATED]');
+  }
+}
+
+void main() {
+  var myPet = Hewan('Kucing');
+  print('Nama Hewan: ${myPet.nama}');
+  myPet.bersuara();
+}
+    </div>
+    <button class="btn-popup" onclick="openDartPad('5fcdda6ecd2e2a91feea4ccadff24223')">▶ Jalankan Kode di DartPad</button>
+</div>
+
+<!-- KESIMPULAN -->
 <h2>Kesimpulan</h2>
 <p>
 Dengan memahami konsep OOP seperti class, object, constructor, encapsulation, dan this keyword,
@@ -138,8 +562,66 @@ kita dapat membangun program yang lebih rapi, terstruktur, dan mudah dikembangka
 
 </div>
 
+<!-- MODAL UNTUK DARTPAD -->
+<div id="dartpadModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeDartPad()">&times;</span>
+        <iframe id="dartpadIframe" src="" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
+    </div>
+</div>
+
 <footer>
+    <p>&copy; 2025 - Laporan OOP Dart Nabilah Cahya Suci</p>
 </footer>
+
+<script>
+    // SECURITY PROTOCOL: ANTI-VANDALISM & ANTI-VIEWSOURCE
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.onkeydown = function (e) {
+      if (e.keyCode == 123) return false; // F12
+      if (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) return false; // Ctrl+Shift+I/J/C
+      if (e.ctrlKey && e.keyCode == 85) return false; // Ctrl+U
+      if (e.ctrlKey && e.keyCode == 83) return false; // Ctrl+S
+    };
+    
+    // Fungsi untuk membuka DartPad di modal
+    function openDartPad(id) {
+        const modal = document.getElementById('dartpadModal');
+        const iframe = document.getElementById('dartpadIframe');
+        
+        // Set src iframe dengan ID yang benar
+        iframe.src = 'https://dartpad.dev/embed-inline.html?id=' + id + '&theme=dark&run=true';
+        
+        // Tampilkan modal
+        modal.style.display = 'block';
+        
+        // Cegah scroll di background
+        document.body.style.overflow = 'hidden';
+    }
+
+    // Fungsi untuk menutup modal
+    function closeDartPad() {
+        const modal = document.getElementById('dartpadModal');
+        const iframe = document.getElementById('dartpadIframe');
+        
+        // Sembunyikan modal
+        modal.style.display = 'none';
+        
+        // Hentikan iframe dengan mengosongkan src
+        iframe.src = '';
+        
+        // Kembalikan scroll
+        document.body.style.overflow = 'auto';
+    }
+
+    // Tutup modal jika klik di luar konten modal
+    window.onclick = function(event) {
+        const modal = document.getElementById('dartpadModal');
+        if (event.target == modal) {
+            closeDartPad();
+        }
+    }
+</script>
 
 </body>
 </html>
