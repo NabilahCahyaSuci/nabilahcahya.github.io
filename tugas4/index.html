@@ -1,1 +1,959 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laporan OOP Dart (Struktur: Judul, Penjelasan, Code, Tombol)</title>
 
+<style>
+/* ===== UI PERTAHAN (SESUAI ASLI) ===== */
+body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background:#ffe6f2;
+    color:#4a0d33;
+}
+
+header{
+    background:#ffb3d9;
+    padding:20px;
+    text-align:center;
+}
+
+header h1{
+    margin:0;
+}
+
+header p{
+    margin:5px 0 0 0;
+    font-weight:bold;
+}
+
+.container{
+    width:90%;
+    max-width:1000px;
+    margin:20px auto;
+    background:white;
+    padding:25px;
+    border-radius:8px;
+    box-shadow:0 4px 8px rgba(0,0,0,0.1);
+}
+
+h2{
+    color:#cc0066;
+    margin-top:40px;
+}
+
+/* iframe wrapper */
+.iframe-wrapper {
+    margin-top: 15px;
+}
+
+iframe{
+    width:100%;
+    height:400px;
+    border:1px solid #ff99cc;
+    border-radius:6px;
+}
+
+/* tombol popup */
+.btn-popup {
+    background-color: #cc0066;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(204, 0, 102, 0.3);
+    transition: background-color 0.2s;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 10px 0 5px 0;
+    position: relative;
+    z-index: 10;
+}
+.btn-popup:hover {
+    background-color: #a30552;
+}
+.btn-popup:active {
+    transform: scale(0.97);
+}
+
+/* kontainer per topik - mengikuti struktur baru: judul, penjelasan, code, tombol, iframe */
+.topik-section {
+    margin-bottom: 40px;
+    border-bottom: 1px dashed #ffb3d9;
+    padding-bottom: 25px;
+}
+
+.topik-judul {
+    color: #cc0066;
+    font-size: 1.5rem;
+    margin: 0 0 10px 0;
+    border-left: 6px solid #ff99cc;
+    padding-left: 15px;
+}
+
+.topik-penjelasan {
+    background: #fff0f7;
+    padding: 12px 18px;
+    border-radius: 12px;
+    margin: 10px 0 15px 0;
+    line-height: 1.6;
+}
+
+/* area kode Dart (pratinjau) - tampil seperti code snippet */
+.code-block {
+    background-color: #2d0a1f;  /* gelap biar kontras */
+    color: #ffe6f2;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+    padding: 15px 20px;
+    border-radius: 14px;
+    border: 1px solid #ff99cc;
+    overflow-x: auto;
+    white-space: pre-wrap;       /* wrap kode panjang */
+    word-break: break-word;
+    margin: 15px 0 10px 0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    line-height: 1.5;
+}
+
+/* kondisi iframe tersembunyi */
+iframe.hidden-iframe {
+    display: none;
+}
+
+/* Style untuk Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    overflow: auto;
+}
+
+.modal-content {
+    position: relative;
+    margin: 5% auto;
+    width: 90%;
+    height: 85%;
+    max-width: 1200px;
+    background: white;
+    border-radius: 12px;
+    padding: 10px;
+}
+
+.modal-content iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 8px;
+}
+
+.close-btn {
+    position: absolute;
+    right: -10px;
+    top: -15px;
+    color: white;
+    background: #cc0066;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1001;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.close-btn:hover {
+    background: #a30552;
+}
+
+/* footer */
+footer{
+    text-align:center;
+    padding:15px;
+    background:#ffb3d9;
+    margin-top:40px;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Polimorfisme dan Abstraksi</h1>
+    <p>Nama: Nabilah Cahya Suci</p>
+    <p>NIM: 251410018</p>
+    <p>Kelas: SI2A</p>
+</header>
+
+<div class="container">
+
+<h2>Pengertian Polimorfisme dan Abstraksi</h2>
+<p>
+Abstraksi dan polimorfisme adalah konsep OOP dimana abstraksi menyembunyikan detail yang rumit dan hanya menampilkan bagian penting, sedangkan polimorfisme memungkinkan satu method memiliki banyak bentuk atau perilaku berbeda tergantung objeknya.
+</p>
+
+<div class="topik-section">
+    <h3 class="topik-judul">🔹 Pewarisan</h3>
+    <div class="topik-penjelasan">
+    Pewarisan (Inheritance) adalah konsep dalam OOP yang memungkinkan sebuah class (child/anak) mewarisi sifat dan method dari class lain (parent/induk), sehingga tidak perlu membuat ulang kode yang sama.
+    </div>
+    <!-- CODE DART (pratinjau) -->
+    <div class="code-block">
+// Nama  : Nabilah Cahya Suci 
+// NIM   : 251410018
+// Kelas : SI2A
+
+class Hewan {
+  void bersuara() => print('...');
+}
+
+class Kucing extends Hewan {
+  @override
+  void bersuara() => print('Meong');
+}
+
+void main() {
+  Kucing k = Kucing();
+  k.bersuara();
+}
+    </div>
+    <!-- TOMBOL IFRAME -->
+    <button class="btn-popup" onclick="openDartPad('44217a36ae427b93703fa13b323b1733')">▶ Jalankan Kode di DartPad</button>
+</div>
+
+
+<!-- ===== TOPIK 2 : OBJECT INSTANTIATION ===== -->
+<div class="topik-section">
+    <h3 class="topik-judul">🔹 Pengantar Polimorfisme</h3>
+    <div class="topik-penjelasan">
+    Polimorfisme adalah konsep dalam OOP yang berarti “banyak bentuk”, yaitu kemampuan suatu objek untuk memiliki perilaku yang berbeda meskipun menggunakan method yang sama. Dalam polimorfisme, objek dari class turunan (subclass) bisa diperlakukan sebagai class induk (superclass), tetapi tetap menjalankan fungsi sesuai jenis objeknya.
+    </div>
+
+<!-- ===== TOPIK 3 : CONSTRUCTORS ===== -->
+<div class="topik-section">
+    <h3 class="topik-judul">🔹 Polimorfisme Inheritance</h3>
+    <div class="topik-penjelasan">
+    Variabel bertipe parent bisa menyimpan objek child dan Method yang dipanggil mengikuti objek aslinya.
+    </div>
+    <div class="code-block">
+// Nama  : Nabilah Cahya Suci 
+// NIM   : 251410018
+// Kelas : SI2A
+
+class Bentuk {
+  void gambar() => print('Menggambar bentuk');
+}
+
+class Lingkaran extends Bentuk {
+  @override
+  void gambar() => print('Menggambar lingkaran');
+}
+
+class Persegi extends Bentuk {
+  @override
+  void gambar() => print('Menggambar persegi');
+}
+
+void main() {
+  Bentuk b1 = Lingkaran();
+  Bentuk b2 = Persegi();
+
+  b1.gambar();
+  b2.gambar();
+}
+    </div>
+    <button class="btn-popup" onclick="openDartPad('e1d1198da6c39809c0a18399aca647fc')">▶ Jalankan Kode di DartPad</button>
+</div>
+
+<!-- ===== TOPIK 4 : MAHASISWA (PRACTICE) ===== -->
+<div class="topik-section">
+    <h3 class="topik-judul">🔹 Manfaat Polimorsime</h3>
+    <div class="topik-penjelasan">
+    Fleksibel
+    Mudah dikembangkan
+    Bisa digunakan kembali (reusable)
+    Mudah dirawat (maintainable)
+    </div>
+
+<!-- ===== TOPIK 5 : ENCAPSULATION ===== -->
+<div class="topik-section">
+    <h3 class="topik-judul">🔹 is dan as Operator</h3>
+    <div class="topik-penjelasan">
+    is → cek tipe objek
+    as → casting tipe objek
+    as? → casting aman (tidak error)
+    </div>
+    <div class="code-block">
+// Nama  : Nabilah Cahya Suci 
+// NIM   : 251410018
+// Kelas : SI2A
+
+class Kendaraan {
+  void klakson() {
+    print('Tin!');
+  }
+}
+
+class Mobil extends Kendaraan {}
+
+void main() {
+  Kendaraan k = Mobil();
+  k.klakson();
+}
+    </div>
+    <button class="btn-popup" onclick="openDartPad('d9a5e6b6a075b262ba057ce838cd4e05')">▶ Jalankan Kode di DartPad</button>
+</div>
+
+<!-- ===== TOPIK 6 : THIS KEYWORD ===== -->
+<div class="topik-section">
+    <h3 class="topik-judul">🔹 Praktik 1: Polimorfisme dengan List</h3>
+    <div class="topik-penjelasan">
+    Gunakan List<Parent>
+    Isi dengan berbagai objek child
+    Loop dan jalankan method
+    </div>
+    <div class="code-block">
+// Nama : Nabilah Cahya Suci 
+// NIM     : 251410018
+// Kelas   : SI2A
+
+class Hewan {
+  void bersuara() => print('Hewan bersuara');
+}
+
+class Kucing extends Hewan {
+  @override
+  void bersuara() => print('Meong');
+}
+
+class Anjing extends Hewan {
+  @override
+  void bersuara() => print('Guk guk');
+}
+
+class Burung extends Hewan {
+  @override
+  void bersuara() => print('Cuit cuit');
+}
+
+void main() {
+  List<Hewan> daftarHewan = [
+    Kucing(),
+    Anjing(),
+    Burung(),
+  ];
+
+  for (var h in daftarHewan) {
+    h.bersuara();
+  }
+}
+    </div>
+    <button class="btn-popup" onclick="openDartPad('49a6bd7598d9252ae96117f5fae14f84')">▶ Jalankan Kode di DartPad</button>
+</div>
+
+<div class="topik-section">
+    <h3 class="topik-judul">🔹 Pengantar Abstraksi</h3>
+    <div class="topik-penjelasan">
+    Menyembunyikan detail dan hanya menampilkan fungsi penting.
+    </div>
+
+<!-- ===== TOPIK 7 : PRODUCT CLASS (KODE AWAL DARI SOAL) ===== -->
+<div class="topik-section">
+    <h3 class="topik-judul">🔹 Abstract Class</h3>
+    <div class="topik-penjelasan">
+     Tidak bisa dibuat objek langsung
+     Bisa punya:
+     Method abstract (tanpa isi)
+     Method biasa (dengan isi)
+    </div>
+    <!-- CODE DART persis seperti di soal: class Product dan main -->
+    <div class="code-block">
+// Nama  : Nabilah Cahya Suci 
+// NIM   : 251410018
+// Kelas : SI2A
+
+abstract class Kendaraan {
+  String? merk;
+
+  void start(); // abstract
+
+  void stop() {
+    print('Kendaraan berhenti');
+  }
+}
+
+class Mobil extends Kendaraan {
+  @override
+  void start() {
+    print('Mobil $merk menyala');
+  }
+}
+
+void main() {
+  Mobil m = Mobil();
+  m.merk = "Toyota";
+  m.start();
+  m.stop();
+}
+    </div>
+    <button class="btn-popup" onclick="openDartPad('b2c053c4983622642029a46500c807a3')">▶ Jalankan Kode di DartPad</button>
+</div>
+
+<div class="topik-section">
+    <h3 class="topik-judul">🔹 Abstract Methoad</h3>
+    <div class="topik-penjelasan">
+       Abstract method adalah method yang tidak punya isi dan harus diisi oleh class turunan.
+    </div>
+    <div class="code-block">
+// Nama  : Nabilah Cahya Suci 
+// NIM   : 251410018
+// Kelas : SI2A
+
+abstract class AlatMusik {
+  void mainkan();
+
+  void info() {
+    print('Ini adalah alat musik');
+  }
+}
+
+class Gitar extends AlatMusik {
+  @override
+  void mainkan() {
+    print('Jreng jreng...');
+  }
+}
+
+void main() {
+  Gitar g = Gitar();
+  g.info();
+  g.mainkan();
+}
+    </div>
+    <button class="btn-popup" onclick="openDartPad('9972fd9c87c9d51f247abea575f5e7ab')">▶ Jalankan Kode di DartPad</button>
+</div>
+
+<div class="topik-section">
+    <h3 class="topik-judul">🔹 Interface di Dark</h3>
+    <div class="topik-penjelasan">
+   Interface di Dart adalah kontrak/aturan yang berisi method yang harus diimplementasikan oleh class lain.
+    </div>
+    <!-- CODE DART (pratinjau) -->
+    <div class="code-block">
+// Nama  : Nabilah Cahya Suci 
+// NIM   : 251410018
+// Kelas : SI2A 
+
+interface class Flyable {
+  void terbang() => print('Terbang...');
+}
+
+class Bird implements Flyable {
+  @override
+  void terbang() => print('Burung terbang tinggi');
+}
+
+class Plane implements Flyable {
+  @override
+  void terbang() => print('Pesawat terbang cepat');
+}
+
+void main() {
+  Bird b = Bird();
+  Plane p = Plane();
+
+  b.terbang();
+  p.terbang();
+}
+    </div>
+    <!-- TOMBOL IFRAME -->
+    <button class="btn-popup" onclick="openDartPad('5525fed0b543a35c08bfa75d0c340cdf')">▶ Jalankan Kode di DartPad</button>
+</div>
+
+<!-- ===== TOPIK 8 : HEWAN CLASS ===== -->
+<div class="topik-section">
+    <h3 class="topik-judul">🔹 Static Member</h3>
+    <div class="topik-penjelasan">
+        Milik class, bukan objek Dipanggil langsung dari class
+    </div>
+    <div class="code-block">
+// Nama  : Nabilah Cahya Suci 
+// NIM   : 251410018
+// Kelas : SI2A
+
+class MathUtils {
+  static double pi = 3.14;
+
+  static int add(int x, int y) {
+    return x + y;
+  }
+}
+
+void main() {
+  print(MathUtils.pi);
+  print(MathUtils.add(10, 20));
+}
+    </div>
+    <button class="btn-popup" onclick="openDartPad('839e8b8b635afd6f9baaa7a389d2011e')">▶ Jalankan Kode di DartPad</button>
+</div>
+
+<div class="topik-section">
+    <h3 class="topik-judul">🔹 Praktik 2: Sistem Pembayaran</h3>
+    <div class="topik-penjelasan">
+    Sistem pembayaran adalah penerapan konsep abstraksi dan polimorfisme dalam OOP, dimana dibuat satu class sebagai dasar (template) dengan method `bayar()`, lalu berbagai jenis pembayaran seperti kartu kredit, e-wallet, dan tunai mengimplementasikan method tersebut dengan cara yang berbeda. Dengan begitu, satu method yang sama dapat digunakan untuk berbagai objek dengan perilaku yang berbeda.
+    </div>
+
+    <div class="code-block">
+// Nama  : Nabilah Cahya Suci 
+// NIM   : 251410018
+// Kelas : SI2A
+
+abstract class MetodePembayaran {
+  void bayar(double jumlah);
+}
+
+class KartuKredit implements MetodePembayaran {
+  @override
+  void bayar(double jumlah) {
+    print('Bayar $jumlah dengan Kartu Kredit');
+  }
+}
+
+class EWallet implements MetodePembayaran {
+  @override
+  void bayar(double jumlah) {
+    print('Bayar $jumlah dengan E-Wallet');
+  }
+}
+
+class Tunai implements MetodePembayaran {
+  @override
+  void bayar(double jumlah) {
+    print('Bayar $jumlah dengan Tunai');
+  }
+}
+
+void main() {
+  List<MetodePembayaran> metode = [
+    KartuKredit(),
+    EWallet(),
+    Tunai()
+  ];
+
+  for (var m in metode) {
+    m.bayar(100000);
+  }
+}
+    </div>
+    <button class="btn-popup" onclick="openDartPad('b3dae62aac083fe7d6da7ed4e8c020d7')">▶ Jalankan Kode di DartPad</button>
+</div>
+
+<div class="topik-section">
+    <h3 class="topik-judul">🔹 Studi Kasus: Sistem Bentuk Geometri</h3>
+    <div class="topik-penjelasan">
+    Sistem bentuk geometri adalah contoh penerapan abstraksi dan polimorfisme dalam OOP, dimana dibuat satu class dasar (misalnya Bentuk) yang memiliki method umum seperti hitungLuas() dan hitungKeliling(). Kemudian, setiap bentuk seperti persegi dan lingkaran akan mengimplementasikan method tersebut dengan cara yang berbeda
+    </div>
+
+    <div class="code-block">
+// Nama  : Nabilah Cahya Suci 
+// NIM   : 251410018
+// Kelas : SI2A
+
+abstract class Bentuk {
+  double hitungLuas();
+  double hitungKeliling();
+
+  void info() {
+    print('Luas: ${hitungLuas()}, Keliling: ${hitungKeliling()}');
+  }
+}
+
+class Persegi implements Bentuk {
+  double sisi;
+  Persegi(this.sisi);
+
+  @override
+  double hitungLuas() => sisi * sisi;
+
+  @override
+  double hitungKeliling() => 4 * sisi;
+
+  @override
+  void info() {
+    print('Persegi sisi $sisi → Luas ${hitungLuas()} | Keliling ${hitungKeliling()}');
+  }
+}
+
+class Lingkaran implements Bentuk {
+  double radius;
+  Lingkaran(this.radius);
+
+  @override
+  double hitungLuas() => 3.14 * radius * radius;
+
+  @override
+  double hitungKeliling() => 2 * 3.14 * radius;
+
+  @override
+  void info() {
+    print('Lingkaran radius $radius → Luas ${hitungLuas()} | Keliling ${hitungKeliling()}');
+  }
+}
+
+void main() {
+  Bentuk b1 = Persegi(4);
+  Bentuk b2 = Lingkaran(7);
+
+  b1.info();
+  b2.info();
+}
+    </div>
+    <button class="btn-popup" onclick="openDartPad('c64ef5f4dbbafc8e657f32c2ddedc5f4')">▶ Jalankan Kode di DartPad</button>
+</div>
+
+
+<!-- KESIMPULAN -->
+<h2>Kesimpulan</h2>
+<p>
+Polimorfisme → satu method, banyak perilaku
+Abstraksi → menyederhanakan sistem
+Interface & abstract class → membuat struktur program lebih rapi
+Membuat kode lebih fleksibel, reusable, dan mudah dikembangkan
+</p>
+
+</div>
+
+<div class="topik-section">
+    <h3 class="topik-judul">🔹 Bonus 1: Class Pekerja</h3>
+    <div class="topik-penjelasan">
+    Class Pekerja adalah sebuah class (biasanya abstract/interface) yang digunakan sebagai template atau dasar untuk berbagai jenis pekerjaan. Di dalamnya terdapat method umum seperti bekerja() yang harus diimplementasikan oleh class turunan seperti Programmer, Dokter, atau Guru.
+    </div>
+    <div class="code-block">
+// Nama  : Nabilah Cahya Suci 
+// NIM   : 251410018
+// Kelas : SI2A
+
+abstract class Pekerja {
+  void bekerja();
+}
+
+class Programmer implements Pekerja {
+  @override
+  void bekerja() {
+    print('Coding aplikasi');
+  }
+}
+
+class Dokter implements Pekerja {
+  @override
+  void bekerja() {
+    print('Mengobati pasien');
+  }
+}
+
+class Guru implements Pekerja {
+  @override
+  void bekerja() {
+    print('Mengajar siswa');
+  }
+}
+
+void main() {
+  List<Pekerja> pekerja = [
+    Programmer(),
+    Dokter(),
+    Guru()
+  ];
+
+  for (var p in pekerja) {
+    p.bekerja();
+  }
+}
+
+
+    </div>
+    <button class="btn-popup" onclick="openDartPad('3597d3971fd12045222ba7e1a83d0552')">▶ Jalankan Kode di DartPad</button>
+</div>
+
+<div class="topik-section">
+    <h3 class="topik-judul">🔹 Bonus 2 Class Table</h3>
+    <div class="topik-penjelasan">
+    Class Tablet adalah class yang merepresentasikan perangkat tablet dengan menggabungkan beberapa fungsi, seperti komputer, kamera, dan telepon. Biasanya, class ini dibuat dengan mewarisi (inherit) dari satu class utama (misalnya Komputer) dan menggunakan class lain sebagai tambahan fitur.
+    </div>
+    <div class="code-block">
+// Nama  : Nabilah Cahya Suci 
+// NIM   : 251410018
+// Kelas : SI2A
+
+class Komputer {
+  void prosesData() {
+    print('Memproses data...');
+  }
+}
+
+mixin KameraMixin {
+  void ambilFoto() {
+    print('Tablet mengambil foto');
+  }
+}
+
+mixin TeleponMixin {
+  void menelepon() {
+    print('Tablet melakukan panggilan');
+  }
+}
+
+class Tablet extends Komputer with KameraMixin, TeleponMixin {
+  void info() {
+    print('Ini adalah Tablet (Komputer + Kamera + Telepon)');
+  }
+}
+
+void main() {
+  Tablet t = Tablet();
+
+  t.info();
+  t.prosesData();
+  t.ambilFoto();
+  t.menelepon();
+}
+
+  
+    </div>
+    <button class="btn-popup" onclick="openDartPad('3c4d2788f01d48b2947a3b6d6bfc957a')">▶ Jalankan Kode di DartPad</button>
+</div>
+
+<div class="topik-section">
+    <h3 class="topik-judul">🔹 Bonus 3 Class Mathutils</h3>
+    <div class="topik-penjelasan">
+    Class MathUtils adalah class yang berisi kumpulan fungsi-fungsi matematika (utility) seperti menghitung faktorial, mengecek bilangan prima, menghitung rata-rata, dan lainnya. Biasanya method di dalamnya bersifat static, sehingga bisa digunakan langsung tanpa membuat objek.
+    </div>
+    <div class="code-block">
+// Nama  : Nabilah Cahya Suci 
+// NIM   : 251410018
+// Kelas : SI2A
+
+import 'dart:math';
+
+class MathUtils {
+  static final Random _random = Random();
+
+  static int faktorial(int n) {
+    if (n < 0) {
+      throw ArgumentError('n tidak boleh negatif');
+    }
+    if (n <= 1) return 1;
+    return n * faktorial(n - 1);
+  }
+
+  static bool isPrima(int n) {
+    if (n <= 1) return false;
+    for (int i = 2; i <= sqrt(n).toInt(); i++) {
+      if (n % i == 0) return false;
+    }
+    return true;
+  }
+
+  static double bulatkan(double angka, int desimal) {
+    double faktor = pow(10, desimal).toDouble();
+    return (angka * faktor).round() / faktor;
+  }
+
+  static int randomInt(int min, int max) {
+    if (min > max) {
+      throw ArgumentError('min tidak boleh lebih besar dari max');
+    }
+    return min + _random.nextInt(max - min + 1);
+  }
+
+  static double randomDouble(double min, double max) {
+    if (min > max) {
+      throw ArgumentError('min tidak boleh lebih besar dari max');
+    }
+    return min + _random.nextDouble() * (max - min);
+  }
+
+  static double rataRata(List<double> data) {
+    if (data.isEmpty) {
+      throw ArgumentError('List tidak boleh kosong');
+    }
+    double total = data.reduce((a, b) => a + b);
+    return total / data.length;
+  }
+
+  static double median(List<double> data) {
+    if (data.isEmpty) {
+      throw ArgumentError('List tidak boleh kosong');
+    }
+
+    List<double> sorted = List.from(data)..sort();
+    int n = sorted.length;
+
+    if (n % 2 == 1) {
+      return sorted[n ~/ 2];
+    } else {
+      return (sorted[n ~/ 2 - 1] + sorted[n ~/ 2]) / 2;
+    }
+  }
+}
+
+void main() {
+  print(MathUtils.faktorial(5));
+  print(MathUtils.isPrima(7));
+  print(MathUtils.bulatkan(3.14159, 2));
+  print(MathUtils.randomInt(1, 10));
+  print(MathUtils.randomDouble(1.0, 5.0));
+  print(MathUtils.rataRata([1, 2, 3, 4, 5]));
+  print(MathUtils.median([1, 2, 3, 4, 5]));
+}
+    </div>
+    <button class="btn-popup" onclick="openDartPad('cf24fa8828cc6560078ac2e5970a42f3')">▶ Jalankan Kode di DartPad</button>
+</div>
+
+<div class="topik-section">
+    <h3 class="topik-judul">🔹 Challenge</h3>
+    <div class="topik-penjelasan">
+    Challenge Media Player adalah latihan yang bertujuan untuk membuat sistem pemutar media dengan menerapkan konsep abstraksi dan interface. Dalam challenge ini dibuat abstract class MediaPlayer sebagai dasar, serta interface seperti Playable dan Pausable yang berisi fungsi play() dan pause().
+    </div>
+    <div class="code-block">
+// Nama  : Nabilah Cahya Suci 
+// NIM   : 251410018
+// Kelas : SI2A
+
+abstract class MediaPlayer {
+  void open();
+}
+
+abstract class Playable {
+  void play();
+}
+
+abstract class Pausable {
+  void pause();
+}
+
+class AudioPlayer extends MediaPlayer implements Playable, Pausable {
+  @override
+  void open() {
+    print("Audio dibuka");
+  }
+
+  @override
+  void play() {
+    print("Audio diputar");
+  }
+
+  @override
+  void pause() {
+    print("Audio dijeda");
+  }
+}
+
+class VideoPlayer extends MediaPlayer implements Playable, Pausable {
+  @override
+  void open() {
+    print("Video dibuka");
+  }
+
+  @override
+  void play() {
+    print("Video diputar");
+  }
+
+  @override
+  void pause() {
+    print("Video dijeda");
+  }
+}
+
+void main() {
+  AudioPlayer audio = AudioPlayer();
+  audio.open();
+  audio.play();
+  audio.pause();
+
+  print("");
+
+  VideoPlayer video = VideoPlayer();
+  video.open();
+  video.play();
+  video.pause();
+}
+    </div>
+    <button class="btn-popup" onclick="openDartPad('5525fed0b543a35c08bfa75d0c340cdf')">▶ Jalankan Kode di DartPad</button>
+</div>
+
+
+<!-- MODAL UNTUK DARTPAD -->
+<div id="dartpadModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeDartPad()">&times;</span>
+        <iframe id="dartpadIframe" src="" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
+    </div>
+</div>
+
+<script>
+    // SECURITY PROTOCOL: ANTI-VANDALISM & ANTI-VIEWSOURCE
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.onkeydown = function (e) {
+      if (e.keyCode == 123) return false; // F12
+      if (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) return false; // Ctrl+Shift+I/J/C
+      if (e.ctrlKey && e.keyCode == 85) return false; // Ctrl+U
+      if (e.ctrlKey && e.keyCode == 83) return false; // Ctrl+S
+    };
+    
+    // Fungsi untuk membuka DartPad di modal
+    function openDartPad(id) {
+        const modal = document.getElementById('dartpadModal');
+        const iframe = document.getElementById('dartpadIframe');
+        
+        // Set src iframe dengan ID yang benar
+        iframe.src = 'https://dartpad.dev/embed-inline.html?id=' + id + '&theme=dark&run=true';
+        
+        // Tampilkan modal
+        modal.style.display = 'block';
+        
+        // Cegah scroll di background
+        document.body.style.overflow = 'hidden';
+    }
+
+    // Fungsi untuk menutup modal
+    function closeDartPad() {
+        const modal = document.getElementById('dartpadModal');
+        const iframe = document.getElementById('dartpadIframe');
+        
+        // Sembunyikan modal
+        modal.style.display = 'none';
+        
+        // Hentikan iframe dengan mengosongkan src
+        iframe.src = '';
+        
+        // Kembalikan scroll
+        document.body.style.overflow = 'auto';
+    }
+
+    // Tutup modal jika klik di luar konten modal
+    window.onclick = function(event) {
+        const modal = document.getElementById('dartpadModal');
+        if (event.target == modal) {
+            closeDartPad();
+        }
+    }
+</script>
+
+</body>
+</html>
